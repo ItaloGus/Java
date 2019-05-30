@@ -1,0 +1,20 @@
+public class quantidadeMax extends PlainDocument {
+private int LimiteDigito;
+public quantidadeMax(int maxLen){
+    super();
+    if (maxLen <= 0)
+        throw new IllegalArgumentException("Especifique a quantidade!");
+    LimiteDigito = maxLen;
+}
+public void insertString(int offset, String str, AttributeSet attr)
+throws BadLocationException{   
+    if(str == null || getLength() == LimiteDigito)
+        return;
+    int totalLetras = (getLength() + str.length());
+    if(totalLetras <= LimiteDigito){
+        super.insertString(offset, str.replaceAll("[^a-z]", ""), (javax.swing.text.AttributeSet) attr);
+    }
+    String nova = str.substring(0, getLength() - LimiteDigito);
+    super.insertString(offset, nova, (javax.swing.text.AttributeSet) attr);
+    }
+}
