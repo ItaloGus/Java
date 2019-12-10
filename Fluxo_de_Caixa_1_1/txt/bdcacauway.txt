@@ -1,0 +1,197 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 10/12/2019 às 21:52
+-- Versão do servidor: 10.4.6-MariaDB
+-- Versão do PHP: 7.3.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `bdcacauway`
+--
+CREATE DATABASE IF NOT EXISTS `bdcacauway` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bdcacauway`;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbestoque`
+--
+
+CREATE TABLE `tbestoque` (
+  `id_estoque` int(11) NOT NULL,
+  `produto_estoque` varchar(30) NOT NULL,
+  `quantidade_estoque` int(4) NOT NULL,
+  `data_chegada_estoque` date NOT NULL,
+  `data_validade_estoque` date NOT NULL,
+  `responsavel_estoque` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `tbestoque`
+--
+
+INSERT INTO `tbestoque` (`id_estoque`, `produto_estoque`, `quantidade_estoque`, `data_chegada_estoque`, `data_validade_estoque`, `responsavel_estoque`) VALUES
+(1, 'Chocolate Amargo', 40, '2019-12-12', '2022-12-12', 'Italo Gustavo Pais Conceição'),
+(2, 'Licor de Cacau', 100, '2019-12-15', '2019-12-24', 'Josué Camarão Furtado'),
+(3, 'Trufa de jabuticaba', 20, '2019-12-20', '2022-12-31', 'Gessé');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbfuncionario`
+--
+
+CREATE TABLE `tbfuncionario` (
+  `id_funcionario` int(11) NOT NULL,
+  `nome_funcionario` varchar(50) NOT NULL,
+  `idade_funcionario` int(3) NOT NULL,
+  `cpf_funcionario` varchar(14) NOT NULL,
+  `endereco_funcionario` varchar(50) NOT NULL,
+  `telefone_funcionario` char(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `tbfuncionario`
+--
+
+INSERT INTO `tbfuncionario` (`id_funcionario`, `nome_funcionario`, `idade_funcionario`, `cpf_funcionario`, `endereco_funcionario`, `telefone_funcionario`) VALUES
+(1, 'Italo Gustavo Pais Conceição', 19, '526.760.482-87', 'Rua Manoel Umbuzeiro 1655 - Centro', '(93)91581023'),
+(2, 'Italo', 12, '12', '12', '12');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbproduto`
+--
+
+CREATE TABLE `tbproduto` (
+  `cod_produto` int(11) NOT NULL COMMENT 'ID do Produto',
+  `nome_produto` varchar(50) NOT NULL COMMENT 'Nomes do Produto',
+  `valor_produto` decimal(7,2) NOT NULL COMMENT 'Valor Unitário do Produto'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `tbproduto`
+--
+
+INSERT INTO `tbproduto` (`cod_produto`, `nome_produto`, `valor_produto`) VALUES
+(1, 'Chocolate Amargo 70%', '12.50'),
+(2, 'Achocolatado 150g', '50.50'),
+(3, 'Licor de Cacau', '25.00'),
+(4, 'Geleia de Cacau', '15.00'),
+(5, 'Nibis', '8.00'),
+(6, 'Bombom meio Amargo', '2.50'),
+(7, 'Trufa de Brigadeiro', '1.95'),
+(8, 'Chocolate ao Leite', '5.00'),
+(10, 'Doce de Cacau', '10.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tbvenda`
+--
+
+CREATE TABLE `tbvenda` (
+  `id_produto` int(11) NOT NULL,
+  `nome_produto` varchar(50) NOT NULL,
+  `venda_produto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `tbvenda`
+--
+
+INSERT INTO `tbvenda` (`id_produto`, `nome_produto`, `venda_produto`) VALUES
+(1, 'Chocolate Amargo 70%', 145),
+(2, 'Achocolatado 150g', 140),
+(3, 'Licor de Cacau', 200),
+(4, 'Geleia de Cacau', 130),
+(5, 'Nibis', 90),
+(6, 'Bombom meio Amargo', 240),
+(7, 'Trufa de Brigadeiro', 80),
+(8, 'Chocolate ao Leite', 100),
+(10, 'Doce de Cacau', 100);
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `tbestoque`
+--
+ALTER TABLE `tbestoque`
+  ADD PRIMARY KEY (`id_estoque`);
+
+--
+-- Índices de tabela `tbfuncionario`
+--
+ALTER TABLE `tbfuncionario`
+  ADD PRIMARY KEY (`id_funcionario`);
+
+--
+-- Índices de tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  ADD PRIMARY KEY (`cod_produto`);
+
+--
+-- Índices de tabela `tbvenda`
+--
+ALTER TABLE `tbvenda`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tbestoque`
+--
+ALTER TABLE `tbestoque`
+  MODIFY `id_estoque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `tbfuncionario`
+--
+ALTER TABLE `tbfuncionario`
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  MODIFY `cod_produto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID do Produto', AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `tbvenda`
+--
+ALTER TABLE `tbvenda`
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Restrições para dumps de tabelas
+--
+
+--
+-- Restrições para tabelas `tbvenda`
+--
+ALTER TABLE `tbvenda`
+  ADD CONSTRAINT `tbvenda_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `tbproduto` (`cod_produto`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
